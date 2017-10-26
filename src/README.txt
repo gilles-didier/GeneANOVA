@@ -13,7 +13,5 @@ A brief description of the files :
 
 - Donnees_AS.design is the corresponding design (one can load it in the design
   submenu of the menu ANOVA).
-  
-Best regards,
 
-Gilles Didier and Elisabeth Remy
+Gilles Didier
