@@ -1,0 +1,219 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Gilles Didier">
+   <meta name="GENERATOR" content="Mozilla/4.77 [fr] (X11; U; Linux 2.4.3-20mdk i686) [Netscape]">
+   <title>menus_en</title>
+</head>
+<body>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2>The <font color="#006600">File
+</font>menu</font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times"><font color="#000099">Open</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">open a table of data.
+The columns have to be separated by <font color="#990000">&lt;tabulation></font>
+and/or <font color="#990000">&lt;;> - </font><font color="#000000">the
+lines by </font><font color="#990000">&lt;carriage return> </font><font color="#000000">and/or
+</font><font color="#990000">&lt;line
+feed></font><font color="#000000">. The numbers are read as well in french
+format as in english. The presence or absence of columns and lines headings
+is managed -in case of absence the lines and/or the columns will be numbered.</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Save</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">save the current table
+of data - if this one has been modified, the modifications will become
+permanent.</font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Save as</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">same thing as <font color="#000099">Save
+</font><font color="#000000">but
+ask before for a new file name (the initial file will not be modified).</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Export</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">sub-menu which allows
+to save the data under various format.</font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Quit</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">as its name indicates
+it....</font></b></blockquote>
+</blockquote>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2>The <font color="#006600">Transform
+</font><font color="#000000">menu</font></font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times">The first three actions
+make it possible to apply various functions to the whole of the data.</font></b>
+<p><b><font face="Times New Roman,Times"><font color="#000099">To logarithm</font></font></b>
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">transform
+the data into their logarithm. Currently, the presence of negative or null
+numbers among the data is not very well taken into account ( their logarithm
+is fixed at zero).</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">To square root</font></font></b>
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">transform
+the data into their square root (same remark as previously concerning the
+negative numbers).</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">To rank</font></font></b>
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">given
+a column, associate to each number its rank - manage the <i>ex-aequos</i>
+correctly so that the sum of the ranks of a column is always the same one.</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Extract</font></font></b>
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">allow
+to select a subset of lines and to remove the others of the table.</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Sort lines</font></font></b>
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">sort
+the lines in the alphabetical order of their headings - with no interest
+if the headings are numbered.</font></font></b></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>&nbsp;</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<b><font face="Times New Roman,Times"><font size=+2>The <font color="#006600">ANOVA
+</font><font color="#000000">menu</font></font></font></b>
+<blockquote>&nbsp;
+<br>&nbsp;
+<p><b><font face="Times New Roman,Times">Gather the functions related to
+variance analyzis of the table. Before being able to use them, it is necessary
+to open or define the set of factors used for this analyzis: the design.
+This last one can be saved and reloaded for a future utilization (see item
+<font color="#000099">Design).</font></font></b>
+<p><b><font face="Times New Roman,Times"><font color="#000099">Compute
+global&nbsp; ANOVA</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">compute the analyzis
+of variance asking before the desired order of interaction. A window presents
+the table resulting from this computation in which a menu makes it possible
+to save the results in text format.</font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Compute local&nbsp;
+ANOVA</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">being given two factors
+f1 and f2 (here generally f1 will be the factor "gene"), compute in each
+class of the partition associated with f1 the analyzis of variance of order
+1 of this subset of data. Only the results relating to the factor f2 are
+displayed.</font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Local ANOVA
+graphics (F)</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">being given two factors
+f1 and f2 (here still generally f1 will be the factor "gene"), represent
+each class of the partition associated with f1 like a point of which :</font></b>
+<ul>
+<li>
+<b><font face="Times New Roman,Times">the abscissa is the ratio between
+the variation due to the factor f2 (only on the subset formed by the considered
+class) normalized by the total variation of the class,</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">the ordinate is the residual at order
+1 (with no interaction), divided by the same denominator as the abscissa.</font></b></li>
+</ul>
+<b><font face="Times New Roman,Times">In this representation the value
+F of a gene is the slope of the line joining the origin and the corresponding
+point. So, to evaluate quickly this quantities, we represent lines with
+slopes associated to F with probabilities of 5/100, 1/100 and 1/1000.</font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Local ANOVA
+graphics (P-value)</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">being given two factors
+f1 and f2 (here still generally f1 will be the factor "gene"), represent
+each class of the partition associated with f1 like a point which :</font></b>
+<br>&nbsp;
+<ul>
+<li>
+<b><font face="Times New Roman,Times">abscissa is the same as previously.</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">ordinate is the logarithm of the
+P-value associated with this sum of squares.</font></b></li>
+</ul>
+</blockquote>
+<b><font face="Times New Roman,Times"><font color="#000099">Design</font></font></b>
+<blockquote><b><font face="Times New Roman,Times">sub-menu which makes
+it possible to define, to save, and to load the under-tables of the factors
+of the ANOVA.</font></b>
+<br><font face="Times New Roman,Times"><i>Enter</i><b> :</b></font>
+<br><b><font face="Times New Roman,Times">&nbsp;A "dialog box" ask you
+first to enter <i>the number of factors</i> of your design,</font></b>
+<br><b><font face="Times New Roman,Times">and then, for each factor,&nbsp;
+to enter <i>the name </i>of the factor and to precise <i>the type of partition</i>
+among the four following possibilities :</font></b>
+<ul>
+<li>
+<b><font face="Times New Roman,Times">partitioning all the lines</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">partitioning all the columns</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">partitioning the lines in N classes</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">partitioning the columns in N classes</font></b></li>
+</ul>
+<b><font face="Times New Roman,Times">If you choose the third or the fourth
+type of partitioning (partition the lines or columns in N classes), then
+the dialog goes on and ask to define the N-1 first classes of the partition.</font></b>
+<p><font face="Times New Roman,Times"><b>Once entered, the design can be
+saved and reopened via the two others items of the menu (</b><i>Save</i><b>
+and </b><i>Load</i><b>).</b></font></blockquote>
+</blockquote>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2>&nbsp;The <font color="#006600">Classification
+</font><font color="#000000">menu</font></font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">The
+software does not carry out itself classifications. However, it can call
+external modules which perform classification from a file containing a
+table of data, and return a file containing a standard description of the
+dendrogram. This resulting file is then interpreted and displayed by our
+software, which make it possible to save it in JPEG format. An example:</font></font></b>
+<center>
+<p><img SRC="exempleTree.jpeg" height=150 width=244></center>
+<b><font face="Times New Roman,Times"><font color="#000000">It is thus
+necessary to define the names (which will be displayed in the menu) and
+especially the paths of the external modules, via </font><font color="#3333FF">Preference</font><font color="#000000">
+menu.</font></font></b></blockquote>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2><font color="#000000">The
+</font><font color="#006600">Vizualisation</font><font color="#000000">
+menu</font></font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">3
+items are proposed</font> :</font></b>
+<ul>
+<li>
+<b><font face="Times New Roman,Times">PCA</font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">Correlation between columns (d<font color="#000000">isplay
+columns in a plane which axes are two lines)</font></font></b></li>
+
+<li>
+<b><font face="Times New Roman,Times">Correlation between lines (d<font color="#000000">isplay
+lines in a plane which axes are two columns)</font></font></b></li>
+</ul>
+</blockquote>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2><font color="#000000">The
+</font><font color="#006600">Windows&nbsp;</font><font color="#000000">
+menu</font></font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">Allow
+to show and hide the ANOVA or current tasks windows.</font></font></b></blockquote>
+
+<h3>
+<b><font face="Times New Roman,Times"><font size=+2><font color="#000000">The
+</font><font color="#006600">Help</font><font color="#000000">
+menu</font></font></font></b></h3>
+
+<blockquote><b><font face="Times New Roman,Times"><font color="#000000">You
+would not be there without knowing it.....</font></font></b></blockquote>
+<b><font face="Times New Roman,Times"><font color="#006600"><font size=+2><a href="index_en.html">Index</a></font></font></font></b>
+</body>
+</html>

@@ -1,0 +1,218 @@
+'               calcul des fonctions de r‚partition statistiques
+
+'               extrait de "Probability Functions"
+'               Marvin Zelen & Norman C. Severo
+'               in "Handbook of Mathematical Functions"
+'               edited by Milton Abramowitz & Irene A. Stegun
+'               Dover Publications, Inc., New York
+
+
+'============================================================================
+
+DEFINT I-N
+
+
+'============================================================================
+'               calcul du risque à par la loi normale
+
+DEF fngauss (x)
+
+ y = ABS(x)
+ t1 = 1 / (1 + .2316419 * y): t2 = t1 * t1: t3 = t2 * t1: t4 = t3 * t1: t5 = t4 * t1
+ z = .3989423 * EXP(-y * y / 2)
+ q = 2 * z * (.31938153# * t1 - .356563782# * t2 + 1.781477937# * t3 - 1.821255978# * t4 + 1.330274429# * t5)
+
+ fngauss = q
+
+END DEF
+
+
+'============================================================================
+'               calcul du risque à associ‚ … un Xý et un ddl donn‚
+
+DEF fnpearson (x2, ddl)
+
+                                ' formule 26.4.14     (Wilson - Hilferty)
+ y = ((x2 / ddl) ^ (1 / 3) + 2 / (9 * ddl) - 1) * SQR(4.5 * ddl)
+ x = ABS(y)
+ t1 = 1 / (1 + .2316419 * x): t2 = t1 * t1: t3 = t2 * t1: t4 = t3 * t1: t5 = t4 * t1
+ z = .3989423 * EXP(-x * x / 2)
+ q = z * (.31938153# * t1 - .356563782# * t2 + 1.781477937# * t3 - 1.821255978# * t4 + 1.330274429# * t5)
+ IF y < 0 THEN q = 1 - q
+
+ IF q > .00001 AND ddl < 30 THEN
+
+  IF (ddl MOD 2) = 0 THEN       ' formule 26.4.21 Q(xý|2) = exp(-xý/2)
+   xm = x2 / 2: xp = xm: s = 1: xd = 1
+   FOR i = 1 TO (ddl - 2) / 2
+    xd = xd * i: s = s + xp / xd: xp = xp * xm
+   NEXT i
+   q = EXP(-xm) * s
+  ELSE                          ' formule 26.4.8  Q(xý|1) = 2Q(x)
+   x = SQR(x2)
+   t1 = 1 / (1 + .2316419 * x): t2 = t1 * t1: t3 = t2 * t1: t4 = t3 * t1: t5 = t4 * t1
+   z = .3989423 * EXP(-x2 / 2)
+   q = z * (.31938153# * t1 - .356563782# * t2 + 1.781477937# * t3 - 1.821255978# * t4 + 1.330274429# * t5)
+   d = 1: s = 0: xp = x
+   FOR i = 1 TO (ddl - 1) / 2
+    d = d * (2 * i - 1): s = s + xp / d: xp = xp * x2
+   NEXT i
+   q = 2 * (q + z * s)
+  END IF
+
+ END IF
+
+ fnpearson = q
+
+END DEF
+
+
+'============================================================================
+'               calcul du risque à associ‚ … un t et un ddl donn‚
+
+DEF fnstudent (t, ddl)
+                               
+                                ' formule 26.6.15     (Paulson avec t = s1/s2 et ddl1 = 1)     
+ y = (((1 - 1 / (4.5 * ddl)) * t ^ (2 / 3)) - 7 / 9) / SQR((t ^ (4 / 3)) / (4.5 * ddl) + 1 / 4.5)
+ x = ABS(y)
+ t1 = 1 / (1 + .2316419 * x): t2 = t1 * t1: t3 = t2 * t1: t4 = t3 * t1: t5 = t4 * t1
+ z = .3989423 * EXP(-x * x / 2)
+ q = z * (.31938153# * t1 - .356563782# * t2 + 1.781477937# * t3 - 1.821255978# * t4 + 1.330274429# * t5)
+ IF y < 0 THEN q = 1 - q
+
+ IF q > .00001 AND ddl < 30 THEN
+                               
+  teta = ATN(t / SQR(ddl)): costeta = COS(teta): pcos2 = costeta * costeta
+  IF (ddl MOD 2) = 0 THEN       ' formule 26.7.4
+   s = 1: p = 1: pcos = 1
+   FOR r = 2 TO ddl - 2 STEP 2
+    p = p * (r - 1) / r
+    pcos = pcos * pcos2
+    s = s + p * pcos
+   NEXT r
+   q = 1 - s * SIN(teta)
+  ELSE                          ' formule 26.7.3
+   IF ddl = 1 THEN
+    q = 1 - teta * .636619772#
+   ELSE
+    s = costeta: p = 1: pcos = costeta
+    FOR r = 3 TO ddl - 2 STEP 2
+     p = p * (r - 1) / r
+     pcos = pcos * pcos2
+     s = s + p * pcos
+    NEXT r
+    q = 1 - (s * SIN(teta) + teta) * .636619772#
+   END IF
+  END IF
+ END IF
+
+ fnstudent = q
+
+END DEF
+
+
+'============================================================================
+'               calcul du risque à associ‚ … un F et deux ddl donn‚s
+
+DEF fnfisher (f, ddl1, ddl2)
+                              
+                                ' formule 26.6.15     (Paulson)   
+ y = ((1 - 2 / (9 * ddl2)) * f ^ (1 / 3) - (1 - 2 / (9 * ddl1))) / SQR(2 / (9 * ddl1) + f ^ (2 / 3) * 2 / (9 * ddl2))
+ x = ABS(y)
+ t1 = 1 / (1 + .2316419 * x): t2 = t1 * t1: t3 = t2 * t1: t4 = t3 * t1: t5 = t4 * t1
+ z = .3989423 * EXP(-x * x / 2)
+ q = z * (.31938153# * t1 - .356563782# * t2 + 1.781477937# * t3 - 1.821255978# * t4 + 1.330274429# * t5)
+ IF y < 0 THEN q = 1 - q
+
+ IF q > .00001 AND ddl1 < 30 AND ddl2 < 30 THEN
+
+  IF (ddl1 MOD 2) = 0 OR (ddl2 MOD 2) = 0 THEN
+                                ' formules 26.6.4 et 26.6.5
+   x = ddl2 / (ddl2 + ddl1 * f): x1 = 1 - x: ddla = ddl1: ddlb = ddl2
+   IF (ddl2 MOD 2) = 0 THEN SWAP x, x1: SWAP ddla, ddlb
+   s = 1: p = 1
+   FOR r = 2 TO ddla - 2 STEP 2
+    p = p * (ddlb + r - 2) / r * x1
+    s = s + p
+   NEXT r
+   q = s * x ^ (ddlb / 2)
+   IF (ddl2 MOD 2) = 0 THEN q = 1 - q
+  ELSE                          ' formule 26.6.8
+   teta = ATN(SQR(ddl1 / ddl2 * f))
+   costeta = COS(teta): pcos2 = costeta * costeta
+   sinteta = SIN(teta): psin2 = sinteta * sinteta
+   IF ddl2 = 1 THEN             ' premiŠre partie de la formule
+    q1 = 1 - teta * .636619772#
+   ELSE
+    s = costeta: p = 1: pcos = costeta
+    FOR r = 3 TO ddl2 - 2 STEP 2
+     p = p * (r - 1) / r
+     pcos = pcos * pcos2
+     s = s + p * pcos
+    NEXT r
+    q1 = 1 - (s * sinteta + teta) * .636619772#
+   END IF
+   IF ddl1 = 1 THEN             ' deuxiŠme partie de la formule
+    q = q1
+   ELSE
+    s = 1: p = 1: psin = 1
+    FOR r = 3 TO ddl1 - 2 STEP 2
+     p = p * (ddl2 + r - 2) / r
+     psin = psin * psin2
+     s = s + p * psin
+    NEXT r
+    beta = .636619772# * s * sinteta * costeta ^ ddl2
+    FOR i = 2 TO (ddl2 - 1) / 2
+     beta = beta * i / (i - .5)
+    NEXT i
+    IF ddl2 = 1 THEN q = q1 + beta ELSE q = q1 + 2 * beta
+   END IF
+  END IF
+ END IF
+
+ fnfisher = q
+
+END DEF
+
+
+'============================================================================
+'               appel des diff‚rentes fonctions
+
+CLS
+
+PRINT SPC(19); "Valeurs correspondant … un risque à de 5 %"
+PRINT : PRINT
+
+'       risque à bilat‚ral avec la loi normale
+x = 1.959963: q = fngauss(x)
+PRINT "loi normale : x ="; x; "  à ="; q
+
+'       risque à avec la distribution de Xý
+x2 = 14.06714: ddl = 7: q = fnpearson(x2, ddl)
+PRINT "loi de Xý : Xý ="; x2; "  ddl ="; ddl; "  à ="; q
+x2 = 15.50731: ddl = 8: q = fnpearson(x2, ddl)
+PRINT "loi de Xý : Xý ="; x2; "  ddl ="; ddl; "  à ="; q
+
+'       risque à avec la distribution de t
+t = 2.364623: ddl = 7: q = fnstudent(t, ddl)
+PRINT "loi de t : t ="; t; "  ddl ="; ddl; "  à ="; q
+t = 2.306003: ddl = 8: q = fnstudent(t, ddl)
+PRINT "loi de t : t ="; t; "  ddl ="; ddl; "  à ="; q
+
+'       risque à avec la distribution de F
+f = 161.45: ddl1 = 1: ddl2 = 1: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 215.71: ddl1 = 3: ddl2 = 1: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 230.16: ddl1 = 5: ddl2 = 1: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 4.6672: ddl1 = 1: ddl2 = 13: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 3.025443: ddl1 = 5: ddl2 = 13: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 2.915274: ddl1 = 6: ddl2 = 13: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+f = 3.105882: ddl1 = 5: ddl2 = 12: q = fnfisher(f, ddl1, ddl2)
+PRINT "loi de F : F ="; f; "  ddl1 ="; ddl1; "  ddl2 ="; ddl2; "  à ="; q
+END
+

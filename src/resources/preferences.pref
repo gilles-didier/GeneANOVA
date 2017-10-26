@@ -1,0 +1,4 @@
+nbProg=0
+special=255*205*205	255*255*102	0*150*0	215*215*250	0*0*180
+query=http://srs.ebi.ac.uk/srs6bin/cgi-bin/wgetz?-newId+[SWALL-AllText:%n]+-lv+30+-view+SequenceSimple
+table=0*0*0	255*0*0	255*0*255	0*0*255	0*255*0	51*153*0	0*153*255	0*255*255	153*102*0	138*208*243	204*0*102	255*153*51

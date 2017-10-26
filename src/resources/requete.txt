@@ -1,0 +1,1 @@
+http://srs.ebi.ac.uk/srs6bin/cgi-bin/wgetz?-newId+[SWALL-GeneName:argB]+-lv+30+-view+SeqSimpleView
